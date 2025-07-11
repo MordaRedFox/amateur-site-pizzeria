@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/menu.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="menu-container item-detail">
+    <div class="item-header">
+        <h1>{{ item.name }}</h1>
+        <p class="item-price-detail">{{ item.price }}₽</p>
+    </div>
+    <div class="divider"></div>
+
+    <div class="item-content">
+        <div class="item-image-container">
+            {% if item.image %}
+            <img src="{{ item.image.url }}" alt="{{ item.name }}" 
+                class="main-image">
+            {% else %}
+            <img src="{% static 'media/menu/image_missing.png' %}" 
+            alt="{{ item.name }}" class="main-image">
+            {% endif %}
+        </div>
+
+        <div class="item-details">
+            <p class="item-description">{{ item.description }}</p>
+
+            <div class="nutrition-info">
+                <h3>Пищевая ценность:</h3>
+                <ul>
+                    <li>Калории: {{ item.calories }} ккал</li>
+                    <li>Белки: {{ item.proteins }} грамм</li>
+                    <li>Жиры: {{ item.fats }} грамм</li>
+                    <li>Углеводы: {{ item.carbohydrates }} грамм</li>
+                    <li>Вес: {{ item.weight }} грамм</li>
+                </ul>
+            </div>
+
+            <div class="toppings-section">
+                {% if toppings %}
+                <h3>Дополнительные топпинги:</h3>
+                <div class="toppings-grid">
+                    {% for topping in toppings %}
+                    <div class="topping-card">
+                        <span class="topping-name">
+                            {{ topping.topping.name }}</span>
+                        <span class="topping-price">
+                            +{{ topping.topping.price_extra }}₽</span>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <h3>Все топпинги для блюда украли аниматроники</h3>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <a href="{% url 'menu:items' category %}" class="back-button">
+        Вернуться к меню</a>
+</div>
+{% endblock %}
