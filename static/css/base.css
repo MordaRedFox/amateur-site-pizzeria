@@ -1,0 +1,367 @@
+/* ========================================================================= */
+/* Глобальные стили и переменные */
+/* ========================================================================= */
+:root {
+    /* Цвета */
+    --primary-color: #8b0000;
+    --secondary-color: #f5f5dc;
+    --text-dark: #222;
+    --text-light: #f8f8f8;
+
+    /* Эффекты */
+    --transition: all 0.3s ease;
+}
+
+/* Глобальный сброс стилей */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Базовый стиль */
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+/* Основные стили страницы */
+body {
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--text-dark);
+    background-color: var(--secondary-color);
+}
+
+/* Основное содержимое */
+main {
+    width: 100%;
+    margin: 0;
+    padding: 1.25rem;
+    display: block;
+    flex: 1;
+    overflow-x: hidden;
+}
+
+/* ========================================================================= */
+/* Стили навигационного меню */
+/* ========================================================================= */
+nav {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: block;
+    background-color: var(--primary-color);
+}
+
+nav ul {
+    margin: 0;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.625rem;
+    list-style: none;
+}
+
+nav li {
+    margin: 0 1rem;
+    padding: 0;
+    white-space: nowrap;
+}
+
+nav a {
+    margin: 0;
+    padding: 0.3125rem 0.625rem;
+    display: inline-block;
+    color: var(--text-light);
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 0.1875rem;
+    transition: var(--transition);
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+nav a:focus {
+    outline: 2px solid var(--text-light);
+    outline-offset: 2px;
+}
+
+/* ========================================================================= */
+/* Стили футера */
+/* ========================================================================= */
+footer {
+    width: 100%;
+    margin: 0;
+    padding: 1rem 1.25rem;
+    display: block;
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    font-size: clamp(0.75rem, 3vw, 0.875rem);
+    text-align: center;
+    flex-shrink: 0;
+}
+
+footer a {
+    color: var(--text-light);
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+    opacity: 0.9;
+}
+
+/* ========================================================================= */
+/* Стили сообщений (Django messages) */
+/* ========================================================================= */
+.messages {
+    width: min(62.5rem, 90%);
+    margin: 0 auto 1.25rem;
+    padding: 0;
+}
+
+.alert {
+    margin-bottom: 0.625rem;
+    padding: 1rem;
+    border: 1px solid transparent;
+    border-radius: 0.3125rem;
+    font-weight: bold;
+}
+
+.alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cd;
+}
+
+.alert-error, .alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+
+.alert-warning {
+    color: #0c5460;
+    background-color: #fff3cd;
+    border-color: #bee5eb;
+}
+
+.alert-info {
+    color: #0c5460;
+    background-color: #d1ecf1;
+    border-color: #bee5eb;
+}
+
+/* ========================================================================= */
+/* Общие стили для ссылок */
+/* ========================================================================= */
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+a:hover {
+    text-decoration: underline;
+    opacity: 0.9;
+}
+
+/* ========================================================================= */
+/* Адаптивные стили */
+/* ========================================================================= */
+@media (max-width: 1200px) {
+    html {
+        font-size: 15px;
+    }
+
+    nav ul {
+        padding: 0.8rem;
+    }
+
+    .messages {
+        width: 85%;
+    }
+}
+
+@media (max-width: 992px) {
+    html {
+        font-size: 14.5px;
+    }
+
+    main {
+        padding: 1.1rem;
+    }
+
+    nav ul {
+        padding: 0.7rem;
+        gap: 0.5rem;
+    }
+
+    nav li {
+        margin: 0 0.7rem;
+    }
+
+    footer {
+        padding: 0.8rem 1rem;
+    }
+
+    .messages {
+        width: 90%;
+    }
+
+    .alert {
+        padding: 0.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    html {
+        font-size: 14px;
+    }
+
+    main {
+        padding: 1rem;
+    }
+
+    nav ul {
+        padding: 0.6rem;
+        gap: 0.4rem;
+    }
+
+    nav li {
+        margin: 0 0.5rem;
+    }
+
+    nav a {
+        font-size: 0.9rem;
+        padding: 0.25rem 0.5rem;
+    }
+
+    footer {
+        padding: 0.7rem 0.8rem;
+    }
+
+    .messages {
+        width: 92%;
+        margin-bottom: 1rem;
+    }
+
+    .alert {
+        padding: 0.7rem;
+        margin-bottom: 0.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    html {
+        font-size: 13.5px;
+    }
+
+    body {
+        line-height: 1.4;
+    }
+
+    main {
+        padding: 0.8rem;
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+        padding: 0.5rem;
+        gap: 0.3rem;
+    }
+
+    nav li {
+        margin: 0.2rem 0;
+    }
+
+    nav a {
+        font-size: 0.85rem;
+        padding: 0.2rem 0.4rem;
+    }
+
+    footer {
+        padding: 0.6rem;
+    }
+
+    .messages {
+        width: 95%;
+    }
+
+    .alert {
+        padding: 0.6rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    html {
+        font-size: 13px;
+    }
+
+    main {
+        padding: 0.7rem;
+    }
+
+    nav a {
+        font-size: 0.8rem;
+    }
+
+    footer {
+        padding: 0.5rem;
+        font-size: 0.7rem;
+    }
+
+    .messages {
+        width: 96%;
+    }
+
+    .alert {
+        padding: 0.5rem;
+    }
+}
+
+@media (max-width: 360px) {
+    html {
+        font-size: 12px;
+    }
+
+    body {
+        font-size: 0.875rem;
+    }
+
+    main {
+        padding: 0.6rem;
+    }
+
+    nav a {
+        font-size: 0.75rem;
+        padding: 0.15rem 0.3rem;
+    }
+
+    footer {
+        padding: 0.4rem;
+    }
+
+    .messages {
+        width: 98%;
+    }
+
+    .alert {
+        padding: 0.4rem;
+        font-size: 0.8rem;
+    }
+}
