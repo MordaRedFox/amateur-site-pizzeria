@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/registration.css' %}">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="{% static 'font_awesome/css/all.min.css' %}">
+{% endblock %}
+
+{% block title %}Регистрация{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <div class="auth-box">
+        <h1>Регистрация</h1>
+        <form method="post" class="auth-form">
+            {% csrf_token %}
+            {% for field in form %}
+            <div class="form-group">
+                {{ field.label_tag }}
+                <div class="password-wrapper">
+                    {{ field }}
+                    {% if field.name == 'password1' or field.name == 'password2' %}
+                    <button type="button" class="password-toggle">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                    {% endif %}
+                </div>
+                {% if field.errors %}
+                <ul class="errorlist">
+                    {% for error in field.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                {% if field.help_text %}
+                <small class="form-text text-muted">
+                    {% if field.name == 'password1' %}
+                        <ul>{{ field.help_text }}</ul>
+                    {% else %}
+                        {{ field.help_text }}
+                    {% endif %}
+                </small>
+                {% endif %}
+            </div>
+            {% endfor %}
+            <button type="submit" class="btn-primary">
+                Зарегистрироваться</button>
+        </form>
+        <div class="auth-links">
+            <p>Уже есть аккаунт? <a href="{% url 'login' %}">Войти</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/password_toggle.js' %}"></script>
+{% endblock %}
