@@ -1,20 +1,20 @@
 /* ========================================================================= */
-/* Глобальные стили и переменные */
+/* Глобальные стили и переменные / Global styles and variables */
 /* ========================================================================= */
 :root {
-    /* Базовые цвета */
+    /* Базовые цвета / Basic colors */
     --primary-color: #8b0000;
     --secondary-color: #f5f5dc;
     --text-dark: #222;
     --text-light: #f8f8f8;
 
-    /* Эффекты */
+    /* Эффекты / Effects */
     --glow-effect: 0 0 15px rgba(139, 0, 0, 0.6);
     --rusty-border: 2px dashed #8b0000;
 }
 
 /* ========================================================================= */
-/* Базовые стили меню, общие для всех страниц */
+/* Стили меню, общие для всех страниц / Menu styles common to all pages  */
 /* ========================================================================= */
 .menu-container {
     width: min(1200px, 92%);
@@ -34,7 +34,7 @@
     color: var(--primary-color);
 }
 
-/* Декоративный разделитель с анимацией при наведении */
+/* Декоративный разделитель / Decorative divider */
 .divider {
     height: 3px;
     margin: 20px 0;
@@ -49,7 +49,7 @@
     opacity: 1;
 }
 
-/* Кнопка "Назад" с анимацией */
+/* Кнопка "Назад" с анимацией / Back button with animation */
 .back-button {
     display: inline-block;
     align-items: center;
@@ -83,7 +83,7 @@
 }
 
 /* ========================================================================= */
-/* Стили для страницы категорий */
+/* Стили для страницы категорий / Styles for the category page */
 /* ========================================================================= */
 .item-grid {
     display: grid;
@@ -92,7 +92,8 @@
     gap: 1.5rem;
 }
 
-/* Карточка категории с анимациями при наведении */
+/* Карточка категории с анимациями при наведении / Category card with
+hover animations */
 .category-card {
     position: relative;
     display: block;
@@ -137,7 +138,8 @@
     border-color: var(--primary-color);
 }
 
-/* Иконка категории с анимацией поворота при наведении на карточку категории */
+/* Иконка с анимацией поворота при наведении на карточку категории / Icon
+with rotation animation when hovering over a category card */
 .category-icon {
     position: relative;
     display: inline-block;
@@ -158,7 +160,8 @@
     color: var(--primary-color)
 }
 
-/* Стили текста карточки категории с анимацией смены цвета */
+/* Стили текста карточки категории с анимацией смены цвета / Category card
+text styles with color change animation */
 .category-card h2 {
     position: relative;
     margin-bottom: 0.5rem;
@@ -180,7 +183,8 @@
 }
 
 /* ========================================================================= */
-/* Стили для страницы со списком карточек блюд */
+/* Стили для страницы с сеткой карточек блюд / Styles for a page with a grid
+of food cards */
 /* ========================================================================= */
 .item-card {
     display: flex;
@@ -197,7 +201,6 @@
     box-shadow: var(--glow-effect);
 }
 
-/* Контейнер для изображений с фиксированным соотношением сторон */
 .menu-item-image-container {
     position: relative;
     width: 100%;
@@ -219,7 +222,6 @@
     transform: scale(1.05);
 }
 
-/* Блок с текстовой информацией о блюде */
 .item-info {
     display: flex;
     flex-direction: column;
@@ -250,7 +252,7 @@
     color: var(--primary-color);
 }
 
-/* Кнопка "Подробнее" */
+/* Кнопка "Подробнее" / "More details" button */
 .item-button {
     display: inline-block;
     margin-top: auto;
@@ -267,7 +269,8 @@
     background-color: #6b0000;
 }
 
-/* Для сообщения при отсутсвии блюд */
+/* Стили для сообщения при отсутсвии блюд / Styles for message when
+dishes are missing */
 .no-items {
     grid-column: 1 / -1;
     padding: 2rem;
@@ -277,7 +280,7 @@
 }
 
 /* ========================================================================= */
-/* Стили для детальной страницы блюда */
+/* Стили для детальной страницы блюда / Styles for the dish detail page */
 /* ========================================================================= */
 .item-detail {
     padding: 2rem;
@@ -287,7 +290,7 @@
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
 }
 
-/* Основная информация о блюде */
+/* Основная информация о блюде / Basic information about the dish */
 .item-header {
     margin-bottom: 1.5rem;
     text-align: center;
@@ -312,7 +315,7 @@
     gap: 2rem;
 }
 
-/* Контейнер с изображением */
+/* Контейнер с изображением / Container with image */
 .item-image-container {
     position: relative;
     padding-top: 100%;
@@ -331,7 +334,7 @@
     transition: transform 0.3s ease;
 }
 
-/* Дополнительная информация о блюде - описание, КБЖУ, топпинги */
+/* Дополнительная информация о блюде / Additional information about the dish */
 .item-details {
     display: flex;
     flex-direction: column;
@@ -345,7 +348,7 @@
     border-bottom: 1px dashed rgba(139, 0, 0, 0.2);
 }
 
-/* Блок с пищевой ценностью (КБЖУ) */
+/* Блок с пищевой ценностью (КБЖУ) / Nutritional value block (NVB) */
 .nutrition-info {
     margin-top: 1.5rem;
     padding: 1.5rem;
@@ -375,7 +378,7 @@
     border-bottom: 1px dotted #ddd;
 }
 
-/* Сетка топпингов */
+/* Сетка топпингов / Toppings grid */
 .toppings-section {
     margin-top: 2rem;
 }
@@ -429,7 +432,7 @@
 }
 
 /* ========================================================================= */
-/* Адаптивные стили */
+/* Адаптивные стили / Adaptive styles */
 /* ========================================================================= */
 @media(max-width: 1200px) {
     .menu-container {

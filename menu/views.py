@@ -22,8 +22,12 @@ TOPPING_MAP = {
     Drink: DrinkTopping,
 }
 
+
 def menu_categories(request):
-    '''Страница категорий меню'''
+    """
+    Представление страницы категорий меню
+    View of the menu categories page
+    """
     categories = [
         {'name': 'Пицца', 'url': 'pizza', 'count': Pizza.objects.count(),
          'icon': '🍕'},
@@ -45,8 +49,12 @@ def menu_categories(request):
     }
     return render(request, 'menu/categories.html', context)
 
+
 def menu_items(request, category):
-    '''Страница списка блюд в категории'''
+    """
+    Представление страницы списка блюд в категории
+    View of the list page of dishes in a category
+    """
     model = MODEL_MAP.get(category)
     if not model:
         return render(request, '404.html', status=404)
@@ -62,8 +70,12 @@ def menu_items(request, category):
     }
     return render(request, 'menu/items.html', context)
 
+
 def menu_item_detail(request, category, pk):
-    '''Страница со всей информацией о блюде'''
+    """
+    Представление страницы со всей информацией о блюде
+    View of a page with all the information about the dish
+    """
     model = MODEL_MAP.get(category)
     if not model:
         return render(request, '404.html', status=404)

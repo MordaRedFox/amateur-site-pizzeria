@@ -1,13 +1,13 @@
 /* ========================================================================= */
-/* Глобальные стили и переменные */
+/* Глобальные стили и переменные / Global styles and variables */
 /* ========================================================================= */
 :root {
-    /* Основные цвета */
+    /* Основные цвета / Primary colors */
     --primary-color: #8b0000;
     --text-dark: #222;
     --text-light: #f8f8f8;
 
-    /* Эффекты */
+    /* Эффекты / Effects */
     --transition: all 0.3s ease;
     --shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     --hover-shadow: 0 5px 15px rgba(139, 0, 0, 0.2);
@@ -15,7 +15,7 @@
 }
 
 /* ========================================================================= */
-/* Общие стили для всех форм аутентификации */
+/* Cтили для форм аутентификации / Styles for authentication forms */
 /* ========================================================================= */
 .auth-container {
     display: flex;
@@ -47,7 +47,7 @@
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
-/* Стили формы */
+/* Стили формы / Form styles */
 .auth-form {
     margin-top: 1.5rem;
 }
@@ -65,7 +65,7 @@
     font-size: 1rem;
 }
 
-/* Стили для полей ввода */
+/* Стили для полей ввода / Styles for input fields */
 input[type="text"],
 input[type="password"],
 input[type="email"] {
@@ -89,7 +89,8 @@ input[type="email"]:focus {
     box-shadow: var(--input-focus);
 }
 
-/* Обертка для пароля и кнопки видимости */
+/* Обертка для пароля и кнопки видимости / Password wrapper and
+visibility buttons */
 .password-wrapper {
     position: relative;
     width: 100%;
@@ -119,7 +120,7 @@ input[type="email"]:focus {
     color: var(--primary-color);
 }
 
-/* Стили для текста помощи */
+/* Стили для текста помощи / Styles for help text */
 .form-text.text-muted {
     display: block;
     margin: 0.5rem 0 0 0;
@@ -137,7 +138,7 @@ input[type="email"]:focus {
     margin-bottom: 0.3rem;
 }
 
-/* Стили ошибок */
+/* Стили ошибок / Error styles */
 .errorlist {
     margin: 0.5rem 0 0 0;
     padding: 0;
@@ -169,7 +170,7 @@ input[type="email"]:focus {
     font-weight: bold;
 }
 
-/* Кнопки */
+/* Кнопки / Buttons */
 .btn-primary {
     display: block;
     width: 100%;
@@ -195,7 +196,7 @@ input[type="email"]:focus {
     box-shadow: var(--hover-shadow);
 }
 
-/* Ссылки в формах */
+/* Ссылки в формах / Links in forms */
 .auth-links {
     margin-top: 1.5rem;
     text-align: center;
@@ -215,7 +216,7 @@ input[type="email"]:focus {
 }
 
 /* ========================================================================= */
-/* Стили страницы выхода */
+/* Стили страницы выхода / Exit page styles */
 /* ========================================================================= */
 .logout-container {
     display: flex;
@@ -283,7 +284,7 @@ input[type="email"]:focus {
 }
 
 /* ========================================================================= */
-/* Адаптивные стили */
+/* Адаптивные стили / Adaptive styles */
 /* ========================================================================= */
 @media(max-width: 1200px) {
     .auth-box {

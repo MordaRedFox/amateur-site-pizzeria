@@ -6,19 +6,24 @@ from PIL import Image
 
 
 # =============================================================================
-# Базовые модели и кастомные валидаторы
+# Кастомные валидаторы и базовые модели / Custom validators and base models
 # =============================================================================
-
-# Кастомные валидаторы
 def validate_image_size(image):
-    '''Ограничение размера загружаемого файла до 20 МБ'''
+    """
+    Ограничение размера загружаемого файла до 20 МБ
+    Upload file size limit is 20 MB
+    """
     limit_mb = 20
     limit = limit_mb * 1024 * 1024
     if image.size > limit:
         raise ValidationError(f'Максимальный размер файла - {limit_mb} MБ')
 
+
 def validate_image_content(image):
-    '''Проверят, что загружаемый файл действительно является изображением'''
+    """
+    Проверят, что загружаемый файл действительно является изображением
+    Check that the file being uploaded is indeed an image
+    """
     try:
         img = Image.open(image)
         img.verify()
@@ -27,9 +32,11 @@ def validate_image_content(image):
         raise ValidationError('Недопустимый формат изображения')
 
 
-# Базовые модели
 class MenuItem(models.Model):
-    '''Абстрактная базовая модель для элементов меню'''
+    """
+    Абстрактная базовая модель для элементов меню
+    Abstract base model for menu elements
+    """
     name = models.CharField(
         'Название блюда',
         max_length=100,
@@ -106,18 +113,27 @@ class MenuItem(models.Model):
         help_text='Содержание углеводов в граммах',
     )
 
+
     def save(self, *args, **kwargs):
-        '''Автоматическое экранирование HTML перед сохранениием'''
+        """
+        Автоматическое экранирование HTML перед сохранениием
+        Automatically escape HTML before saving
+        """
         self.name = strip_tags(self.name)
         self.description = strip_tags(self.description)
         super().save(*args, **kwargs)
 
+
     def delete(self, *args, **kwargs):
-        '''Удаление модели и связанных с ней файлов изображений'''
+        """
+        Удаление модели и связанных с ней файлов изображений
+        Deleting a model and its associated image files
+        """
         if self.image:
             storage, path = self.image.storage, self.image.path
             storage.delete(path)
         super().delete(*args, **kwargs)
+
 
     class Meta:
         abstract = True
@@ -127,13 +143,20 @@ class MenuItem(models.Model):
             models.Index(fields=['price']),
         ]
 
+
     def __str__(self):
-        '''Строковое представление модели'''
+        """
+        Строковое представление модели
+        String representation of the model
+        """
         return f'{self.name} - {self.price}₽'
 
 
 class Topping(models.Model):
-    '''Топпинги для блюд'''
+    """
+    Модель топпингов для блюд
+    Model of toppings for dishes
+    """
     name = models.CharField(
         'Название',
         max_length=100,
@@ -150,18 +173,27 @@ class Topping(models.Model):
         help_text='Дополнительная стоимость топпинга (неотрицательная)',
     )
 
+
     def save(self, *args, **kwargs):
-        '''Автоматическое экранировние HTML перед сохранением'''
+        """
+        Автоматическое экранировние HTML перед сохранением
+        Automatically escape HTML before saving
+        """
         self.name = strip_tags(self.name)
         super().save(*args, **kwargs)
+
 
     class Meta:
         ordering = ['name']
         verbose_name = 'топпинг'
         verbose_name_plural = 'Топпинги'
 
+
     def __str__(self):
-        '''Строковое представление модели'''
+        """
+        Строковое представление модели
+        String representation of the model
+        """
         if self.price_extra:
             extra = f' (+{self.price_extra}₽)'
         else:
@@ -170,25 +202,32 @@ class Topping(models.Model):
 
 
 class BaseToppingRelation(models.Model):
-    '''Абстрактная модель связи блюда с топпингами'''
+    """
+    Абстрактная модель связи блюда с топпингами
+    Abstract model of the relationship between a dish and toppings
+    """
     topping = models.ForeignKey(Topping, verbose_name='Топпинг',
                                 on_delete=models.CASCADE)
+
 
     class Meta:
         abstract = True
         ordering = ['topping__name']
 
+
     def __str__(self):
-        '''Строковое представление модели'''
+        """
+        Строковое представление модели
+        String representation of the model
+        """
         if hasattr(self, 'item'):
             return f'{self.item.name} + {self.topping.name}'
         return f'Топпинг: {self.topping.name}'
 
 
 # =============================================================================
-# Модели блюд
+# Модели блюд / Models of dishes
 # =============================================================================
-
 class Pizza(MenuItem):
     class Meta:
         verbose_name = 'пиццу'
@@ -226,12 +265,13 @@ class Drink(MenuItem):
 
 
 # =============================================================================
-# Модели связей блюд с топпингами
+# Модели связей блюд и топпингов / Models of relationships between dishes
+# and toppings
 # =============================================================================
-
 class PizzaTopping(BaseToppingRelation):
     item = models.ForeignKey(Pizza, related_name='toppings',
                              verbose_name='Пицца', on_delete=models.CASCADE)
+
 
     class Meta:
         unique_together = ('item', 'topping')
@@ -243,6 +283,7 @@ class BurgerTopping(BaseToppingRelation):
     item = models.ForeignKey(Burger, related_name='toppings',
                              verbose_name='Бургер', on_delete=models.CASCADE)
 
+
     class Meta:
         unique_together = ('item', 'topping')
         verbose_name = 'топпинг бургера'
@@ -252,6 +293,7 @@ class BurgerTopping(BaseToppingRelation):
 class SnackTopping(BaseToppingRelation):
     item = models.ForeignKey(Snack, related_name='toppings',
                              verbose_name='Снэк', on_delete=models.CASCADE)
+
 
     class Meta:
         unique_together = ('item', 'topping')
@@ -263,6 +305,7 @@ class SaladTopping(BaseToppingRelation):
     item = models.ForeignKey(Salad, related_name='toppings',
                              verbose_name='Салат', on_delete=models.CASCADE)
 
+
     class Meta:
         unique_together = ('item', 'topping')
         verbose_name = 'топпинг салата'
@@ -273,6 +316,7 @@ class DessertTopping(BaseToppingRelation):
     item = models.ForeignKey(Dessert, related_name='toppings',
                              verbose_name='Десерт', on_delete=models.CASCADE)
 
+
     class Meta:
         unique_together = ('item', 'topping')
         verbose_name = 'топпинг десерта'
@@ -282,6 +326,7 @@ class DessertTopping(BaseToppingRelation):
 class DrinkTopping(BaseToppingRelation):
     item = models.ForeignKey(Drink, related_name='toppings',
                              verbose_name='Напиток', on_delete=models.CASCADE)
+
 
     class Meta:
         unique_together = ('item', 'topping')

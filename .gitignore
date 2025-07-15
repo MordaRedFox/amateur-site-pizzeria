@@ -1,12 +1,12 @@
 ### Python ###
-# Виртуальные окружения
+# Виртуальные окружения / Virtual environments
 .venv/
 venv/
 env/
 env.bak/
 ENV/
 
-# Кэш Python и скомпилированные файлы
+# Кэш Python и скомпилированные файлы / Python cache and compiled files
 pycache/
 *.py[cod]
 *$py.class
@@ -31,25 +31,26 @@ share/python-wheels/
 pip-wheel-metadata/
 pip-delete-this-directory.txt
 
-# Файлы зависимостей
+# Файлы зависимостей / Dependency files
 *.manifest
 *.spec
 
+
 ### Django ###
-# Локальная БД
+# Локальная БД / Local database
 *.sqlite3
 *.sqlite
 db.sqlite3
 
-# Собранные статические файлы (collectstatic)
+# Собранные статические файлы / Collected static files
 staticfiles/
 static/media
 
-# Загруженные медиа-файлы
+# Загруженные медиа-файлы / Uploaded media files
 /media/
 !media/.gitkeep
 
-# Локальные настройки
+# Локальные настройки / Local settings
 local_settings.py
 .env
 .env.local
@@ -58,13 +59,14 @@ local_settings.py
 *.local
 settings/local.py
 
-# Логи и временные файлы
+# Логи и временные файлы / Logs and temporary files
 *.log
 *.pot
 *.mo
 logs/
 *.log.*
 *.bak
+
 
 ### IDE ###
 # VS Code
@@ -83,23 +85,25 @@ logs/
 *.ipr
 *.iws
 
-# Другие IDE
+# Other IDEs
 .DS_Store
 *.sublime-workspace
 *.sublime-project
 
+
 ### Windows ###
-# Файлы Windows
+# Файлы Windows / Windows files
 Thumbs.db
 ehthumbs.db
 [Dd]esktop.ini
 *.lnk
 *.stackdump
 
-# Файлы кэша
+# Файлы кэша / Cache files
 [Tt]humbs.db
 
-### Тестовые данные ###
+
+### Тестовые данные / Test data ###
 test_data/
 coverage/
 htmlcov/
@@ -109,5 +113,6 @@ htmlcov/
 .hypothesis/
 .pytest_cache/
 
-### Документация ###
+
+### Документация / Documentation ###
 docs/_build/

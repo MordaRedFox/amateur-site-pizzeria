@@ -1,3 +1,4 @@
+// Скрипт для смены видимости пароля / Script to change password visibility
 document.addEventListener('DOMContentLoaded', function() {
     const togglePassword = (button) => {
         const wrapper = button.closest('.password-wrapper');
@@ -6,8 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        // Ищем input внутри wrapper, учитывая, что Django может обернуть его
-        // в дополнительные элементы
+        // Ищем input внутри wrapper / Looking for input inside wrapper
         const input = wrapper.querySelector(
             'input[type="password"], input[type="text"]');
         if (!input) {
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        // Переключаем тип input
+        // Переключаем тип input / Switching the input type
         input.type = input.type === 'password' ? 'text' : 'password';
 
         // Переключаем иконки
@@ -29,7 +29,8 @@ document.addEventListener('DOMContentLoaded', function() {
         icon.classList.toggle('fa-eye-slash');
     };
 
-    // Обработчик для всех кнопок переключения пароля
+    // Обработчик для всех кнопок переключения пароля / Handler for all
+    // password toggle buttons
     document.querySelectorAll('.password-toggle').forEach(button => {
         button.addEventListener('click', (e) => {
             e.preventDefault();

@@ -8,6 +8,9 @@ class MenuConfig(AppConfig):
 
     @staticmethod
     def validate_menu_item(sender, instance, **kwargs):
-        '''Дополнительная валидация элементов меню перед сохранением'''
+        """
+        Дополнительная валидация элементов меню перед сохранением
+        Additional validation of menu items before saving
+        """
         if instance.price <= 0:
             raise ValueError('Цена должна быть положительной')

@@ -4,11 +4,18 @@ from django.contrib import messages
 
 
 def custom_404(request, exception):
-    '''Обработка ошибки 404'''
+    """
+    Обработка ошибки 404
+    Handling 404 error
+    """
     return render(request, '404.html', status=404)
 
+
 def register(request):
-    '''Обработка входа или регистрации пользователя'''
+    """
+    Обработка входа или регистрации пользователя
+    Processing user login or registration
+    """
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():

@@ -7,11 +7,13 @@ from .models import (Topping, Pizza, Burger, Snack, Salad, Dessert, Drink,
 
 
 # =============================================================================
-# 1. Базовые классы
+# Базовые классы / Base classes
 # =============================================================================
-
 class BaseMenuItemAdmin(admin.ModelAdmin):
-    '''Базовый класс админки для меню'''
+    """
+    Базовый класс админки для меню
+    Base admin class for menu
+    """
     list_display = ('name', 'description_short', 'price', 'image_preview')
     search_fields = ('name', 'description')
     list_filter = ('name',)
@@ -28,41 +30,53 @@ class BaseMenuItemAdmin(admin.ModelAdmin):
         })
     ]
 
+
     class Meta:
         ordering = ['name']
 
+
     def clean(self):
-        '''Проверка на положительную цену и уникальность названия'''
+        """
+        Проверка на положительную цену и уникальность названия
+        Check for positive price and uniqueness of the name
+        """
         super().clean()
 
-        # Проверка на положительную цену
+        # Проверка на положительную цену / Check for positive price
         if hasattr(self, 'cleaned_data') and 'price' in self.cleaned_data:
             if self.cleaned_data['price'] <= 0:
                 raise ValidationError(
                     {'price': 'Цена должна быть положительной'})
 
-        # Проверка на уникальность назввания
+        # Проверка на уникальность названия / Checking the uniqueness of a name
         if hasattr(self, 'cleaned_data') and 'name' in self.cleaned_data:
             name = self.cleaned_data['name']
             model = self.model
-            # Проверяем, существует ли уже товар с таким именем
             if (model.objects.filter(name=name)
                 .exclude(pk=self.instance.pk if self.instance else None)
                 .exists()):
                 raise ValidationError(
                     {'name': 'Товар с таким названием уже существует'})
 
+
     @admin.display(description='Описание')
     def description_short(self, obj):
-        '''Сокращает слишком длинные описания блюд в меню'''
+        """
+        Сокращает слишком длинные описания блюд в меню
+        Shortens overly long menu descriptions
+        """
         if not obj.description:
             return ''
         return (obj.description[:50] + '...' if len(obj.description) > 50 
                 else obj.description)
 
+
     @admin.display(description='Превью')
     def image_preview(self, obj):
-        '''Превью изображения в админке'''
+        """
+        Превью изображения в админке
+        Preview image in admin panel
+        """
         if obj.image:
             return format_html(
                 '<img src="{}" style="max-height: 100px;"/>', obj.image.url)
@@ -70,31 +84,47 @@ class BaseMenuItemAdmin(admin.ModelAdmin):
 
 
 class ToppingRelationAdmin(admin.ModelAdmin):
-    '''Базовый класс для связи топпингов'''
+    """
+    Базовый класс для связи топпингов
+    Base class for linking toppings
+    """
     list_display = ('item_name', 'topping', 'price_with_topping')
     list_filter = ('topping',)
     search_fields = ('topping__name', 'item__name')
+
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._verbose_names_cache = {}
 
+
     def get_queryset(self, request):
         return super().get_queryset(request).select_related('topping')
 
+
     @admin.display(description='Блюдо')
     def item_name(self, obj):
-        '''Название блюда без указания типа'''
+        """
+        Название блюда без указания типа
+        Name of the dish without specifying the type
+        """
         return obj.item.name
+
 
     @admin.display(description='Итоговая цена')
     def price_with_topping(self, obj):
-        '''Общая цена блюда с топпингом'''
+        """
+        Общая цена блюда с топпингом
+        Total price of the dish with topping
+        """
         return f'{obj.item.price + obj.topping.price_extra:.2f}₽'
 
 
 class ToppingInline(admin.TabularInline):
-    '''Базовый класс для Inline-топпингов'''
+    """
+    Базовый класс для Inline-топпингов
+    Base class for Inline toppings
+    """
     extra = 1
     verbose_name = 'Топпинг'
     verbose_name_plural = 'Топпинги'
@@ -102,9 +132,8 @@ class ToppingInline(admin.TabularInline):
 
 
 # =============================================================================
-# 2. Inline для топпингов блюд
+# Inline для топпингов блюд / Inline for topping dishes
 # =============================================================================
-
 class PizzaToppingInline(ToppingInline):
     model = PizzaTopping
 
@@ -130,32 +159,37 @@ class DrinkToppingInline(ToppingInline):
 
 
 # =============================================================================
-# 3. Админки для топпингов и блюд
+# Админки для топпингов и блюд / Admin panels for toppings and dishes
 # =============================================================================
-
 @admin.register(Topping)
 class ToppingAdmin(admin.ModelAdmin):
-    '''Админка для топпинга'''
+    """
+    Админка для топпинга
+    Admin panel for topping
+    """
     list_display = ('name', 'price_extra')
     search_fields = ('name',)
     list_filter = ('price_extra',)
 
+
     def clean(self):
-        '''Проверка на положительную цену и уникальность названия'''
+        """
+        Проверка на положительную цену и уникальность названия
+        Check for positive price and uniqueness of the name
+        """
         super().clean()
 
-        # Проверка на положительную цену
+        # Проверка на положительную цену / Check for positive price
         if (hasattr(self, 'cleaned_data') and 'price_extra' in 
             self.cleaned_data):
             if self.cleaned_data['price_extra'] <= 0:
                 raise ValidationError(
                     {'price_extra': 'Цена должна быть положительной'})
 
-        # Проверка на уникальность назввания
+        # Проверка на уникальность названия / Checking the uniqueness of a name
         if hasattr(self, 'cleaned_data') and 'name' in self.cleaned_data:
             name = self.cleaned_data['name']
             model = self.model
-            # Проверяем, существует ли уже товар с таким именем
             if (model.objects.filter(name=name)
                 .exclude(pk=self.instance.pk if self.instance else None)
                 .exists()):
@@ -194,7 +228,7 @@ class DrinkAdmin(BaseMenuItemAdmin):
 
 
 # =============================================================================
-# 4. Админки для топпингов и блюд
+# Админки для топпингов и блюд / Admin panels for toppings and dishes
 # =============================================================================
 
 @admin.register(PizzaTopping)

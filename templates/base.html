@@ -3,7 +3,7 @@
 <html lang='ru'>
 
 <head>
-    <!-- Основные настройки -->
+    <!-- Основные настройки / Basic settings -->
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>{% block title %}Animatronic Pizzeria{% endblock %}</title>
@@ -37,27 +37,27 @@
             <li><a href="{% url 'home' %}">Главная</a></li>
             <li><a href="{% url 'menu:categories' %}">Меню</a></li>
             {% if user.is_authenticated %}
-              <li><a href="#">Личный кабинет</a></li>
-              <li>
+            <li><a href="#">Личный кабинет</a></li>
+            <li>
                 <a href="#"
                     onclick="document.getElementById('logout-form').submit();
                     return false;">Выйти</a>
             </li>
             {% else %}
-              <li><a href="{% url 'login' %}">Войти</a></li>
+            <li><a href="{% url 'login' %}">Войти</a></li>
             {% endif %}
         </ul>
     </nav>
 
     <main>
         {% if messages %}
-          <div class="messages">
+        <div class="messages">
             {% for message in messages %}
-              <div class="alert alert-{{ message.tags }}">
+            <div class="alert alert-{{ message.tags }}">
                 {{ message|escape}}
-              </div>
+            </div>
             {% endfor %}
-          </div>
+        </div>
         {% endif %}
 
         {% block content %}{% endblock %}
@@ -65,8 +65,8 @@
 
     <footer>
         <p>
-          <a href="https://github.com/MordaRedFox" target="_blank" 
-            rel="noopener noreferrer">Animatronic Pizzeria</a>
+            <a href="https://github.com/MordaRedFox" target="_blank" 
+                rel="noopener noreferrer">Animatronic Pizzeria</a>
             © {% now "Y" %}
         </p>
     </footer>
