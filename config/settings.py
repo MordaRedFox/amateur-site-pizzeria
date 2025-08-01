@@ -64,6 +64,7 @@ INSTALLED_APPS = [
 
     # Локальные приложения проекта / Local project applications
     'menu',
+    'users',
 ]
 
 MIDDLEWARE = [
