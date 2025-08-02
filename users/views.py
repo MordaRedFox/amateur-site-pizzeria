@@ -49,6 +49,33 @@ class CustomLoginView(LoginView):
     template_name = 'registration/login.html'
 
 
+    def form_invalid(self, form):
+        """
+        Счётчик оставшихся попыток входа в аккаунт до блокировки
+        Counter of remaining attempts to log into the account before blocking
+        """
+        response = super().form_invalid(form)
+        ip = self.request.META.get('REMOTE_ADDR', '')
+        user_agent = self.request.META.get('HTTP_USER_AGENT', '')
+
+        # Получаем последнюю попытку входа для этого IP/User-Agent / Get the
+        # last login attempt for this IP/User-Agent
+        attempt = AccessAttempt.objects.filter(
+            ip_address=ip,
+            user_agent=user_agent
+        ).order_by('-attempt_time').first()
+
+        # Вычисляем оставшиеся попытки / Calculate the remaining attempts
+        if attempt:
+            remaining_attempts = max(
+                0, settings.AXES_FAILURE_LIMIT - attempt.failures_since_start)
+        else:
+            remaining_attempts = settings.AXES_FAILURE_LIMIT
+
+        response.context_data['remaining_attempts'] = remaining_attempts
+        return response
+
+
     def dispatch(self, request, *args, **kwargs):
         """
         Переопределённый метод dispatch - первая точка входа для запроса.

@@ -18,6 +18,12 @@
             {% for error in form.non_field_errors %}
                 {{ error }}
             {% endfor %}
+
+            {% if remaining_attempts is not None %}
+                <div>
+                    Осталось попыток: {{ remaining_attempts }}
+                </div>
+            {% endif %}
         </div>
         {% endif %}
 
