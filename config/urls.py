@@ -4,8 +4,8 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.urls import include, path
 from django.views.generic import TemplateView
-from users.views import CustomLoginView
-from .views import custom_404, register
+from users.views import CustomLoginView, register
+from .views import custom_404
 
 
 # Обработка ошибки 404 / Handling 404 error

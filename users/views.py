@@ -1,11 +1,13 @@
-from django.shortcuts import render
-from axes.models import AccessAttempt
-from django.utils import timezone
+import time
+from django.conf import settings
+from django.contrib import messages
 from django.contrib.auth.views import LoginView
 from django.http import HttpResponseRedirect
+from django.shortcuts import render, redirect
 from django.urls import reverse
-from django.conf import settings
-import time
+from django.utils import timezone
+from axes.models import AccessAttempt
+from .forms import CustomUserCreationForm
 
 
 def locked_out_view(request):
@@ -39,6 +41,26 @@ def locked_out_view(request):
 
     context = {'unlock_timestamp': unlock_timestamp}
     return render(request, 'users/locked.html', context)
+
+
+def register(request):
+    """
+    Обработка входа или регистрации пользователя
+    Processing user login or registration
+    """
+    if request.method == 'POST':
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            username = form.cleaned_data.get('username')
+            messages.success(
+                request,
+                f'{username}, ваш аккаунт создан! Теперь вы можете войти'
+            )
+            return redirect('login')
+    else:
+        form = CustomUserCreationForm()
+    return render(request, 'registration/register.html', {'form': form})
 
 
 class CustomLoginView(LoginView):
