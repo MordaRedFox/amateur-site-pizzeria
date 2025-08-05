@@ -311,6 +311,20 @@ h2::first-letter {
         gap: 2rem;
     }
 
+    .image-row {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .image-item {
+        width: 100%;
+    }
+
+    .image-item img {
+        height: auto;
+        max-height: 28.125rem;
+    }
+
     .terminal-container {
         width: 85%;
     }

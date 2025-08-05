@@ -89,6 +89,7 @@ logs/
 .DS_Store
 *.sublime-workspace
 *.sublime-project
+.vs/
 
 
 ### Windows ###
