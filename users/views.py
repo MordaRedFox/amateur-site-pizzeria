@@ -6,8 +6,39 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.utils import timezone
+from django.contrib.auth.decorators import login_required
 from axes.models import AccessAttempt
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, ProfileEditForm
+
+
+@login_required
+def profile_view(request):
+    """
+    Обработчик страницы профиля пользователя
+    User profile page handler
+    """
+    if request.method == 'POST':
+        form = ProfileEditForm(request.POST, instance=request.user)
+        if form.is_valid():
+            try:
+                form.save()
+                messages.success(request, 'Профиль успешно обновлен!')
+                return redirect('users:profile')
+            
+            except Exception as e:
+                messages.error(
+                    request,
+                    'Произошла непредвиденная ошибка при обновлении профиля!'
+                )
+    else:
+        form = ProfileEditForm(instance=request.user)
+    
+    context = {
+        'user': request.user,
+        'form': form,
+        'edit_mode': 'edit' in request.GET
+    }
+    return render(request, 'users/profile.html', context)
 
 
 def locked_out_view(request):

@@ -27,22 +27,12 @@
 </head>
 
 <body>
-    <!-- Скрытая форма для выхода -->
-    <form id="logout-form" method="post"
-            action="{% url 'logout' %}" style="display: none;">
-        {% csrf_token %}
-    </form>
     <nav>
         <ul>
             <li><a href="{% url 'home' %}">Главная</a></li>
             <li><a href="{% url 'menu:categories' %}">Меню</a></li>
             {% if user.is_authenticated %}
-            <li><a href="#">Личный кабинет</a></li>
-            <li>
-                <a href="#"
-                    onclick="document.getElementById('logout-form').submit();
-                    return false;">Выйти</a>
-            </li>
+            <li><a href="{% url 'users:profile' %}">Кабинет охраны</a></li>
             {% else %}
             <li><a href="{% url 'login' %}">Войти</a></li>
             {% endif %}
