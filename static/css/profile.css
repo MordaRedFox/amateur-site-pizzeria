@@ -10,7 +10,6 @@
 
     /* Цвета ошибок / Error colors */
     --error-color: #dc3545;
-    --error-hover: #c82333;
 
     /* Базовые эффекты / Basic effects */
     --transition: all 0.3s ease;
@@ -20,7 +19,7 @@
     --hover-shadow: 0 5px 15px rgba(139, 0, 0, 0.2);
 }
 
-/* Анимации */
+/* Анимации / Animations */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
@@ -30,25 +29,25 @@
 /* Стили контейнера профиля / Profile container styles */
 /* ========================================================================= */
 .profile-container {
+    position: relative;
     width: min(1000px, 90%);
     margin: 2rem auto;
     padding: 2rem;
+    overflow: hidden;
     background-color: var(--secondary-color);
+    border: 1px solid rgba(139, 0, 0, 0.1);
     border-radius: 0.625rem;
     box-shadow: var(--shadow);
-    border: 1px solid rgba(139, 0, 0, 0.1);
     animation: fadeIn 0.5s ease-out;
-    position: relative;
-    overflow: hidden;
 }
 
 .profile-container h1 {
+    position: relative;
     margin-bottom: 1.5rem;
     color: var(--primary-color);
     font-size: clamp(1.8rem, 5vw, 2.5rem);
     text-align: center;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-    position: relative;
 }
 
 /* Декоративный разделитель / Decorative divider */
@@ -75,19 +74,19 @@
 }
 
 .profile-view {
+    position: relative;
     padding: 1.5rem;
+    overflow: hidden;
     background-color: #ffffea;
+    border: 1px solid rgba(139, 0, 0, 0.1);
     border-radius: 0.75rem;
     box-shadow: 0 8px 32px rgba(139, 0, 0, 0.1);
-    border: 1px solid rgba(139, 0, 0, 0.1);
     transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
 }
 
 .profile-view::before {
-    content: '';
     position: absolute;
+    content: '';
     top: 0;
     left: 0;
     right: 0;
@@ -122,28 +121,28 @@
 }
 
 .profile-view strong {
+    margin-right: 0.5rem;
     color: var(--primary-color);
     font-weight: 600;
-    margin-right: 0.5rem;
 }
 
 /* ========================================================================= */
 /* Стили формы редактирования / Edit form styles */
 /* ========================================================================= */
 .profile-edit-form {
+    position: relative;
     padding: 1.5rem;
+    overflow: hidden;
     background-color: #ffffea;
+    border: 1px solid rgba(139, 0, 0, 0.1);
     border-radius: 0.75rem;
     box-shadow: 0 8px 32px rgba(139, 0, 0, 0.1);
-    border: 1px solid rgba(139, 0, 0, 0.1);
     transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
 }
 
 .profile-edit-form::before {
-    content: '';
     position: absolute;
+    content: '';
     top: 0;
     left: 0;
     right: 0;
@@ -165,49 +164,49 @@
 .form-group input {
     width: 100%;
     padding: 0.8rem 1rem;
+    background-color: rgba(245, 245, 220, 0.7);
     border: 1px solid #ddd;
     border-radius: 0.5rem;
     font-size: 1rem;
     transition: var(--transition);
-    background-color: rgba(245, 245, 220, 0.7);
 }
 
 .form-group input:focus {
-    border-color: var(--primary-color);
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(139, 0, 0, 0.2);
     background-color: #ffffea;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(139, 0, 0, 0.2);
+    outline: none;
 }
 
 .error {
+    margin-top: 0.3rem;
     color: var(--error-color);
     font-size: 0.9rem;
-    margin-top: 0.3rem;
 }
 
 /* ========================================================================= */
 /* Стили кнопок / Button styles */
 /* ========================================================================= */
 .btn {
+    position: relative;
     display: inline-block;
     padding: 0.8rem 1.5rem;
+    overflow: hidden;
     border: none;
     border-radius: 0.5rem;
     font-size: 1rem;
     font-weight: 600;
+    text-align: center;
+    text-decoration: none;
     cursor: pointer;
     transition: var(--transition);
-    text-decoration: none;
-    text-align: center;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    position: relative;
-    overflow: hidden;
     z-index: 1;
 }
 
 .btn::after {
-    content: '';
     position: absolute;
+    content: '';
     top: 0;
     left: 0;
     width: 100%;
@@ -254,9 +253,9 @@
 
 .form-actions,
 .profile-actions {
+    margin-top: 1.5rem;
     display: flex;
     gap: 1rem;
-    margin-top: 1.5rem;
 }
 
 .form-actions .btn,
@@ -284,17 +283,17 @@
 }
 
 .alert {
-    padding: 1rem;
-    border-radius: 0.5rem;
-    margin-bottom: 1rem;
-    border: 1px solid transparent;
     position: relative;
+    margin-bottom: 1rem;
+    padding: 1rem;
     overflow: hidden;
+    border: 1px solid transparent;
+    border-radius: 0.5rem;
 }
 
 .alert::before {
-    content: '';
     position: absolute;
+    content: '';
     top: 0;
     left: 0;
     width: 5px;
@@ -367,8 +366,8 @@
 
 @media(max-width: 992px) {
     .profile-container {
-        padding: 1.5rem;
         margin: 1.5rem auto;
+        padding: 1.5rem;
     }
 
     .profile-container h1 {
@@ -391,14 +390,14 @@
 
 @media(max-width: 768px) {
     .profile-container {
-        padding: 1.2rem;
-        margin: 1.2rem auto;
         width: 95%;
+        margin: 1.2rem auto;
+        padding: 1.2rem;
     }
 
     .profile-container h1 {
-        font-size: 2rem;
         margin-bottom: 1.2rem;
+        font-size: 2rem;
     }
 
     .profile-divider {
@@ -424,8 +423,8 @@
 
 @media(max-width: 576px) {
     .profile-container {
-        padding: 1rem;
         margin: 1rem auto;
+        padding: 1rem;
         border-radius: 0.5rem;
     }
 
@@ -455,8 +454,8 @@
 
 @media(max-width: 480px) {
     .profile-container {
-        padding: 0.8rem;
         width: 98%;
+        padding: 0.8rem;
     }
 
     .profile-container h1 {
@@ -468,8 +467,8 @@
     }
 
     .form-group label {
-        font-size: 0.9rem;
         margin-bottom: 0.3rem;
+        font-size: 0.9rem;
     }
 
     .error {

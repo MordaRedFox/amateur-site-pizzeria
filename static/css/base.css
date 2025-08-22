@@ -27,26 +27,26 @@ html {
 
 /* Основные стили страницы / Basic page styles */
 body {
+    display: flex;
     width: 100%;
     min-height: 100vh;
     margin: 0;
     padding: 0;
-    display: flex;
     flex-direction: column;
+    background-color: var(--secondary-color);
+    color: var(--text-dark);
     overflow-x: hidden;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 1rem;
     line-height: 1.5;
-    color: var(--text-dark);
-    background-color: var(--secondary-color);
 }
 
 main {
+    display: block;
+    flex: 1;
     width: 100%;
     margin: 0;
     padding: 1.25rem;
-    display: block;
-    flex: 1;
     overflow-x: hidden;
 }
 
@@ -54,57 +54,110 @@ main {
 /* Стили навигационного меню / Navigation menu styles */
 /* ========================================================================= */
 nav {
-    width: 100%;
-    margin: 0;
-    padding: 0;
+    position: relative;
     display: block;
+    width: 100%;
+    min-height: 3.5rem;
+    margin: 0;
+    padding: 0.5rem 0;
+    overflow: hidden;
     background-color: var(--primary-color);
 }
 
 nav ul {
-    margin: 0;
-    padding: 1rem;
     display: flex;
+    margin: 0;
+    padding: 0 1rem;
+    gap: 1.5rem;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 0.625rem;
     list-style: none;
 }
 
 nav li {
-    margin: 0 1rem;
+    margin: 0;
     padding: 0;
     white-space: nowrap;
-}
-
-nav a {
-    margin: 0;
-    padding: 0.3125rem 0.625rem;
-    display: inline-block;
-    color: var(--text-light);
-    font-weight: bold;
-    text-decoration: none;
-    border-radius: 0.1875rem;
+    transform: skewX(-15deg);
     transition: var(--transition);
 }
 
+nav li:hover {
+    transform: skewX(-15deg);
+}
+
+nav a {
+    position: relative;
+    display: inline-block;
+    margin: 0;
+    padding: 0.8rem 1.8rem;
+    overflow: hidden;
+    background: linear-gradient(145deg, #9d0000, #790000);
+    color: var(--text-light);
+    border: none;
+    border-radius: 0.25rem;
+    font-weight: bold;
+    text-decoration: none;
+    transform: skewX(15deg);
+    transition: var(--transition);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 1;
+}
+
+nav a::before {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+    z-index: -1;
+}
+
+nav a::after {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(145deg, #a50000, #8b0000);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -2;
+}
+
 nav a:hover {
-    text-decoration: underline;
+    text-decoration: none;
+    transform: skewX(15deg);
+    box-shadow: 0 6px 20px rgba(139, 0, 0, 0.4);
+}
+
+nav a:hover::before {
+    left: 100%;
+}
+
+nav a:hover::after {
+    opacity: 1;
 }
 
 nav a:focus {
     outline: 2px solid var(--text-light);
-    outline-offset: 2px;
+    outline-offset: 3px;
+    transform: skewX(15deg);
 }
 
 /* ========================================================================= */
 /* Стили футера / Footer styles */
 /* ========================================================================= */
 footer {
+    display: block;
     width: 100%;
     margin: 0;
     padding: 1rem 1.25rem;
-    display: block;
     background-color: var(--primary-color);
     color: var(--text-light);
     font-size: clamp(0.75rem, 3vw, 0.875rem);
@@ -234,18 +287,110 @@ a:hover {
         padding: 1rem;
     }
 
+    nav {
+        min-height: 3.5rem;
+        padding: 0.8rem 0;
+    }
+
+    /* Скрываем обычное меню на мобильных / Hide the regular menu on mobiles */
     nav ul {
-        padding: 0.6rem;
-        gap: 0.4rem;
+        display: none;
     }
 
-    nav li {
-        margin: 0 0.5rem;
+    /* Стили для кнопки бургера / Burger button styles */
+    .burger-menu {
+        position: absolute;
+        display: block;
+        top: 50%;
+        left: 1rem;
+        width: 2.5rem;
+        height: 2.5rem;
+        background: linear-gradient(145deg, #9d0000, #790000);
+        border: none;
+        border-radius: 0.25rem;
+        transform: translateY(-50%);
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        z-index: 100;
     }
 
-    nav a {
-        font-size: 0.9rem;
-        padding: 0.25rem 0.5rem;
+    .burger-menu::before,
+    .burger-menu::after {
+        position: absolute;
+        content: '';
+        left: 0.5rem;
+        width: 1.5rem;
+        height: 0.2rem;
+        background-color: var(--text-light);
+        transition: var(--transition);
+    }
+
+    .burger-menu::before {
+        top: 0.8rem;
+    }
+
+    .burger-menu::after {
+        top: 1.3rem;
+    }
+
+    .burger-menu span {
+        position: absolute;
+        left: 0.5rem;
+        top: 1.8rem;
+        width: 1.5rem;
+        height: 0.2rem;
+        background-color: var(--text-light);
+        transition: var(--transition);
+    }
+
+    /* Чекбокс для управления меню / Checkbox for menu control */
+    #burger-toggle {
+        display: none;
+    }
+
+    /* Стили для выпадающего меню / Styles for dropdown menu */
+    #burger-toggle:checked ~ nav ul {
+        position: fixed;
+        display: flex;
+        flex-direction: column;
+        top: 3.5rem;
+        left: 0;
+        width: 100%;
+        padding: 1rem;
+        gap: 0.5rem;
+        background-color: var(--primary-color);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        z-index: 99;
+    }
+
+    #burger-toggle:checked ~ nav li {
+        width: 100%;
+        margin: 0;
+        transform: none;
+    }
+
+    #burger-toggle:checked ~ nav a {
+        width: 100%;
+        padding: 1rem;
+        text-align: center;
+        border-radius: 0.5rem;
+        font-size: 1rem;
+        transform: none;
+    }
+
+    /* Анимация бургер-кнопки / Burger button animation */
+    #burger-toggle:checked ~ .burger-menu::before {
+        top: 1.1rem;
+        transform: rotate(45deg);
+    }
+
+    #burger-toggle:checked ~ .burger-menu::after {
+        top: 1.1rem;
+        transform: rotate(-45deg);
+    }
+
+    #burger-toggle:checked ~ .burger-menu span {
+        opacity: 0;
     }
 
     footer {
@@ -258,8 +403,8 @@ a:hover {
     }
 
     .alert {
-        padding: 0.7rem;
         margin-bottom: 0.5rem;
+        padding: 0.7rem;
     }
 }
 
@@ -276,20 +421,48 @@ a:hover {
         padding: 0.8rem;
     }
 
-    nav ul {
-        flex-direction: column;
-        align-items: center;
-        padding: 0.5rem;
-        gap: 0.3rem;
+    nav {
+        min-height: 3.2rem;
+        padding: 0.7rem 0;
     }
 
-    nav li {
-        margin: 0.2rem 0;
+    .burger-menu {
+        left: 0.8rem;
+        width: 2.2rem;
+        height: 2.2rem;
     }
 
-    nav a {
-        font-size: 0.85rem;
-        padding: 0.2rem 0.4rem;
+    .burger-menu::before,
+    .burger-menu::after,
+    .burger-menu span {
+        left: 0.4rem;
+        width: 1.4rem;
+    }
+
+    .burger-menu::before {
+        top: 0.7rem;
+    }
+
+    .burger-menu::after {
+        top: 1.1rem;
+    }
+
+    .burger-menu span {
+        top: 1.5rem;
+    }
+
+    #burger-toggle:checked ~ .burger-menu::before,
+    #burger-toggle:checked ~ .burger-menu::after {
+        top: 0.9rem;
+    }
+
+    #burger-toggle:checked ~ nav ul {
+        top: 3.2rem;
+    }
+
+    #burger-toggle:checked ~ nav a {
+        padding: 0.8rem;
+        font-size: 0.9rem;
     }
 
     footer {
@@ -315,8 +488,49 @@ a:hover {
         padding: 0.7rem;
     }
 
-    nav a {
-        font-size: 0.8rem;
+    nav {
+        min-height: 3rem;
+        padding: 0.6rem 0;
+    }
+
+    .burger-menu {
+        left: 0.7rem;
+        width: 2rem;
+        height: 2rem;
+    }
+
+    .burger-menu::before,
+    .burger-menu::after,
+    .burger-menu span {
+        left: 0.3rem;
+        width: 1.3rem;
+    }
+
+    .burger-menu::before {
+        top: 0.6rem;
+    }
+
+    .burger-menu::after {
+        top: 1rem;
+    }
+
+    .burger-menu span {
+        top: 1.4rem;
+    }
+
+    #burger-toggle:checked ~ .burger-menu::before,
+    #burger-toggle:checked ~ .burger-menu::after {
+        top: 0.8rem;
+    }
+
+    #burger-toggle:checked ~ nav ul {
+        top: 3rem;
+        padding: 0.8rem;
+    }
+
+    #burger-toggle:checked ~ nav a {
+        padding: 0.7rem;
+        font-size: 0.85rem;
     }
 
     footer {
@@ -346,9 +560,50 @@ a:hover {
         padding: 0.6rem;
     }
 
-    nav a {
-        font-size: 0.75rem;
-        padding: 0.15rem 0.3rem;
+    nav {
+        min-height: 2.8rem;
+        padding: 0.5rem 0;
+    }
+
+    .burger-menu {
+        left: 0.6rem;
+        width: 1.8rem;
+        height: 1.8rem;
+    }
+
+    .burger-menu::before,
+    .burger-menu::after,
+    .burger-menu span {
+        left: 0.2rem;
+        width: 1.2rem;
+        height: 0.15rem;
+    }
+
+    .burger-menu::before {
+        top: 0.5rem;
+    }
+
+    .burger-menu::after {
+        top: 0.9rem;
+    }
+
+    .burger-menu span {
+        top: 1.3rem;
+    }
+
+    #burger-toggle:checked ~ .burger-menu::before,
+    #burger-toggle:checked ~ .burger-menu::after {
+        top: 0.7rem;
+    }
+
+    #burger-toggle:checked ~ nav ul {
+        top: 2.8rem;
+        padding: 0.6rem;
+    }
+
+    #burger-toggle:checked ~ nav a {
+        padding: 0.6rem;
+        font-size: 0.8rem;
     }
 
     footer {

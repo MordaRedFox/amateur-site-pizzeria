@@ -1,42 +1,50 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block title %}{{ category_name }}{% endblock %}
+
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/menu.css' %}">
 {% endblock %}
 
 {% block content %}
 <div class="menu-container">
-    <a href="{% url 'menu:categories' %}" 
-        class="back-button">Все категории</a>
+    <a href="{% url 'menu:categories' %}" class="back-button">
+        Все категории
+    </a>
     <h1>{{ category_name }}</h1>
+
     <div class="divider"></div>
 
     <div class="item-grid">
         {% for item in items %}
         <div class="item-card">
-            <div class="menu-item-image-container">
-                {% if item.image %}
-                <img src="{{ item.image.url }}" alt="{{ item.name }}" 
-                    class="item-image">
-                {% else %}
-                <img src="{% static 'media/menu/image_missing.png' %}" 
-                alt="{{ item.name }}" class="item-image">
-                {% endif %}
-            </div>
-            <div class="item-info">
-                <h2 class="item-title">{{ item.name }}</h2>
-                <p class="item-description">
-                    {{ item.description|truncatechars:100 }}</p>
-                <p class="item-price">Цена: {{ item.price }}₽</p>
-                <a href="{% url 'menu:item_detail' category item.pk %}" 
-                    class="item-button">Подробнее</a>
-            </div>
+            <a href="{% url 'menu:item_detail' category item.pk %}">
+                <div class="menu-item-image-container">
+                    {% if item.image %}
+                    <img src="{{ item.image.url }}" alt="{{ item.name }}"
+                         class="item-image">
+                    {% else %}
+                    <img src="{% static 'media/menu/image_missing.png' %}"
+                         alt="{{ item.name }}" class="item-image">
+                    {% endif %}
+                </div>
+                <div class="item-info">
+                    <h2 class="item-title">{{ item.name }}</h2>
+                    <p class="item-description">
+                        {{ item.description|truncatechars:100 }}
+                    </p>
+                    <p class="item-price">Цена: {{ item.price }} ₽</p>
+                    <p class="item-button">Подробнее</p>
+                </div>
+            </a>
         </div>
         {% empty %}
         <div class="no-items">
-            <p>В этой категории пока нет блюд. Возможно, аниматроники 
-                всё съели...</p>
+            <p>
+                В этой категории пока нет блюд. Возможно, аниматроники
+                всё съели...
+            </p>
         </div>
         {% endfor %}
     </div>

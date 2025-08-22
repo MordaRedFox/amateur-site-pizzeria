@@ -1,13 +1,12 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block title %}Вход{% endblock %}
+
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/registration.css' %}">
-<!-- Font Awesome -->
 <link rel="stylesheet" href="{% static 'font_awesome/css/all.min.css' %}">
 {% endblock %}
-
-{% block title %}Вход{% endblock %}
 
 {% block content %}
 <div class="auth-container">
@@ -16,13 +15,12 @@
         {% if form.non_field_errors %}
         <div class="alert alert-danger">
             {% for error in form.non_field_errors %}
-                {{ error }}
+            {{ error }}
             {% endfor %}
-
             {% if remaining_attempts is not None %}
-                <div>
-                    Осталось попыток: {{ remaining_attempts }}
-                </div>
+            <div>
+                Осталось попыток: {{ remaining_attempts }}
+            </div>
             {% endif %}
         </div>
         {% endif %}
@@ -52,8 +50,10 @@
             <button type="submit" class="btn-primary">Войти</button>
         </form>
         <div class="auth-links">
-            <p>Нет аккаунта? 
-                <a href="{% url 'register' %}">Зарегистрироваться</a></p>
+            <p>
+                Нет аккаунта?
+                <a href="{% url 'register' %}">Зарегистрируйтесь!</a>
+            </p>
         </div>
     </div>
 </div>

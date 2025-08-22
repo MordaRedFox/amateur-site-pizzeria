@@ -1,111 +1,128 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block title %}Animatronic Pizzeria{% endblock %}
+
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/home.css' %}">
 {% endblock %}
 
 {% block content %}
-<h1>🍕 Animatronic Pizzeria 🍕</h1>
-<div class="divider"></div>
-<h2>Добро пожаловать!</h2>
+<div class="home-container">
+    <h1>🍕 Animatronic Pizzeria 🍕</h1>
 
-<!-- Блок информации с текстом / Information block with text -->
-<div class='content'>
-    <p>С 1983 года Animatronic Pizzeria остается не просто рестораном, а 
-        настоящим символом детского восторга, музыки и незабываемых 
-        впечатлений! Наша история началась с мечты создать место, где 
-        передовые технологии, кулинарное мастерство и безудержное веселье 
-        сливаются воедино, даря гостям волшебство каждый день.</p>
-    <p>Наши аниматроники – это больше чем роботы, это легенды! Каждый из 
-        них – уникальный артист с собственным характером и харизмой. Они 
-        поют, танцуют и разыгрывают целые представления, превращая обычный 
-        ужин в настоящее шоу. Дети обожают их, а взрослые с ностальгией 
-        вспоминают лучшие моменты своего детства.</p>
-    <p>Не верьте тем, кто говорит, что волшебство ушло – Animatronic Pizzeria 
-        по-прежнему ждёт вас! Наши двери открыты, печи работают, а 
-        аниматроники заряжены на улыбки. Приходите за вкусом, оставайтесь 
-        за эмоциями!</p>
-</div>
+    <div class="divider"></div>
 
-<div class="spacer"></div>
-
-<!-- Блок сетки картинок / Picture grid block -->
-<h2>Только в нашей пиццерии:</h2>
-
-<div class="image-grid">
-    <!-- Первый ряд / First row -->
-    <div class="image-row">
-        <div class="image-item">
-            <p>Команда талантливых профессионалов, которая превратит ваш 
-                праздник в незабываемое событие!</p>
-            <img src="{% static 'media/home/home1.png' %}" alt="home1.png">
-        </div>
-        <div class="image-item">
-            <p>Весёлые игровые площадки для ярких детских праздников, 
-                наполненных радостью, смехом и волшебством!</p>
-            <img src="{% static 'media/home/home2.png' %}" alt="home2.png">
-        </div>
+    <!-- Блок информации с текстом / Information block with text -->
+    <h2>Добро пожаловать!</h2>
+    <div class="content">
+        <p>
+            С 1983 года Animatronic Pizzeria остается не просто рестораном, а
+            настоящим символом детского восторга, музыки и незабываемых
+            впечатлений! Наша история началась с мечты создать место, где
+            передовые технологии, кулинарное мастерство и безудержное веселье
+            сливаются воедино, даря гостям волшебство каждый день.
+        </p>
+        <p>
+            Наши аниматроники – это больше чем роботы, это легенды! Каждый из
+            них – уникальный артист с собственным характером и харизмой. Они
+            поют, танцуют и разыгрывают целые представления, превращая обычный
+            ужин в настоящее шоу. Дети обожают их, а взрослые с ностальгией
+            вспоминают лучшие моменты своего детства.
+        </p>
+        <p>
+            Не верьте тем, кто говорит, что волшебство ушло – Animatronic
+            Pizzeria по-прежнему ждёт вас! Наши двери открыты, печи работают,
+            а аниматроники заряжены на улыбки. Приходите за вкусом,
+            оставайтесь за эмоциями!
+        </p>
     </div>
 
-    <!-- Второй ряд / Second row -->
-    <div class="image-row">
-        <div class="image-item">
-            <p>Ищете работу? Предлагаем вам безопасную вакансию ночного 
-                охранника в нашей пиццерии.</p>
-            <img src="{% static 'media/home/home3.png' %}" alt="home3.png">
-        </div>
-        <div class="image-item">
-            <p>Очаровательные и добрые аниматроники в стильных образах жаждут 
-                встречи с вами!</p>
-            <img src="{% static 'media/home/home4.png' %}" alt="home4.png">
-        </div>
-    </div>
-</div>
+    <div class="spacer"></div>
 
-<div class="divider"></div>
-
-<!-- Блок с терминалом / Block with terminal -->
-<div class="terminal-container">
-    <div class="terminal">
-        <div class="terminal-header">
-            <div class="terminal-title">SYSTEM LOG</div>
+    <!-- Блок сетки картинок / Picture grid block -->
+    <h2>Только в нашей пиццерии:</h2>
+    <div class="image-grid">
+        <!-- Первый ряд / First row -->
+        <div class="image-row">
+            <div class="image-item">
+                <p>
+                    Команда талантливых профессионалов, которая превратит ваш
+                    праздник в незабываемое событие!
+                </p>
+                <img src="{% static 'media/home/home1.png' %}" alt="home1.png">
+            </div>
+            <div class="image-item">
+                <p>
+                    Весёлые игровые площадки для ярких детских праздников,
+                    наполненных радостью, смехом и волшебством!
+                </p>
+                <img src="{% static 'media/home/home2.png' %}" alt="home2.png">
+            </div>
         </div>
-        <div class="terminal-body">
-            <div class="terminal-line"><span class="hidden-letter" 
-                data-letter="I"></span>NITIALIZING SYSTEM...</div>
-            <div class="terminal-line">TRACKING ERROR DETECTED <span 
-                class="hidden-letter" data-letter="T"></span>YPE 0x4F</div>
-            <div class="terminal-line">ANIM<span class="hidden-letter" 
-                data-letter="'"></span>TRONIC BEHAVIOR ABNORMAL</div>
-            <div class="terminal-line"><span class="hidden-letter" 
-                data-letter="S"></span>ECURITY LOCKDOWN ENABLED</div>
-            <div class="terminal-line">POWER FAILURE IN SECTOR <span 
-                class="hidden-letter" data-letter="M"></span>7</div>
-            <div class="terminal-line">EMERGENCY <span class="hidden-letter" 
-                data-letter="E"></span>XIT DISABLED</div>
-            <div class="terminal-status">
-                <span class="status-dots">...</span>
-                <span class="secret-message">I ALWAYS COME BACK</span>
+        <!-- Второй ряд / Second row -->
+        <div class="image-row">
+            <div class="image-item">
+                <p>
+                    Ищете работу? Предлагаем вам безопасную вакансию ночного
+                    охранника в нашей пиццерии.
+                </p>
+                <img src="{% static 'media/home/home3.png' %}" alt="home3.png">
+            </div>
+            <div class="image-item">
+                <p>
+                    Очаровательные и добрые аниматроники в стильных образах
+                    жаждут встречи с вами!
+                </p>
+                <img src="{% static 'media/home/home4.png' %}" alt="home4.png">
             </div>
         </div>
     </div>
+
+    <div class="divider"></div>
+
+    <!-- Блок с терминалом / Block with terminal -->
+    <div class="terminal-container">
+        <div class="terminal">
+            <div class="terminal-header">
+                <div class="terminal-title">SYSTEM LOG</div>
+            </div>
+            <div class="terminal-body">
+                <div class="terminal-line"><span class="hidden-letter"
+                    data-letter="I"></span>NITIALIZING SYSTEM...</div>
+                <div class="terminal-line">TRACKING ERROR DETECTED <span
+                    class="hidden-letter" data-letter="T"></span>YPE 0x4F</div>
+                <div class="terminal-line">ANIM<span class="hidden-letter"
+                    data-letter="'"></span>TRONIC BEHAVIOR ABNORMAL</div>
+                <div class="terminal-line"><span class="hidden-letter"
+                    data-letter="S"></span>ECURITY LOCKDOWN ENABLED</div>
+                <div class="terminal-line">POWER FAILURE IN SECTOR <span
+                    class="hidden-letter" data-letter="M"></span>7</div>
+                <div class="terminal-line"><span class="hidden-letter"
+                    data-letter="E"></span>XITS ARE BLOCKED</div>
+                <div class="terminal-status">
+                    <span class="status-dots">...</span>
+                    <span class="secret-message">I ALWAYS COME BACK</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="spacer"></div>
+
+    <!-- Затемнение страницы / Darkening the page -->
+    <div class="darken-overlay" id="darkenOverlay"></div>
+
+    <!-- Видео скримера / Video of a screamer -->
+    <video id="screamerVideo" class="screamer-video" autoplay muted>
+        <source src="{% static 'media/home/screamer.mp4' %}" type="video/mp4">
+    </video>
+
+    <!-- Мелодии для скрипта / Melodies for the script -->
+    <audio id="clickSound" src="{% static 'media/home/click.mp3' %}"></audio>
+    <audio id="secretSound" src="{% static 'media/home/secret.mp3' %}"></audio>
+    <audio id="screamSound" src="{% static 'media/home/scream.mp3' %}"></audio>
 </div>
-
-<div class="spacer"></div>
-
-<!-- Затемнение страницы / Darkening the page -->
-<div class="darken-overlay" id="darkenOverlay"></div>
-
-<!-- Видео скримера / Video of a screamer -->
-<video id="screamerVideo" class="screamer-video" autoplay muted>
-    <source src="{% static 'media/home/screamer.mp4' %}" type="video/mp4">
-</video>
-
-<!-- Мелодии для скрипта / Melodies for the script -->
-<audio id="clickSound" src="{% static 'media/home/click.mp3' %}"></audio>
-<audio id="secretSound" src="{% static 'media/home/secret.mp3' %}"></audio>
-<audio id="screamSound" src="{% static 'media/home/scream.mp3' %}"></audio>
 {% endblock %}
 
 {% block extra_js %}

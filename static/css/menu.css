@@ -13,25 +13,32 @@
     --rusty-border: 2px dashed #8b0000;
 }
 
+/* Анимации / Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 /* ========================================================================= */
 /* Стили меню, общие для всех страниц / Menu styles common to all pages  */
 /* ========================================================================= */
 .menu-container {
-    width: min(1200px, 92%);
+    position: relative;
+    width: min(75rem, 92%);
     margin: 2rem auto;
     padding: 2rem;
     background-color: var(--secondary-color);
     border: var(--rusty-border);
-    border-radius: 12px;
-    position: relative;
+    border-radius: 0.75rem;
     overflow: hidden;
+    animation: fadeIn 0.5s ease-out;
 }
 
 .menu-container h1 {
-    margin-bottom: 1.5rem;
+    margin: 0 0 1.5rem 0;
+    color: var(--primary-color);
     font-size: 2.5rem;
     text-align: center;
-    color: var(--primary-color);
 }
 
 /* Декоративный разделитель / Decorative divider */
@@ -49,33 +56,58 @@
     opacity: 1;
 }
 
-/* Кнопка "Назад" с анимацией / Back button with animation */
 .back-button {
+    position: relative;
     display: inline-block;
-    align-items: center;
     margin: 1rem 0;
     padding: 0.7rem 1.5rem;
-    gap: 0.5rem;
-    border: 1px solid transparent;
-    border-radius: 30px;
+    border: none;
+    border-radius: 1.875rem;
     background-color: var(--primary-color);
     color: var(--text-light);
-    font-weight: 500;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
     text-decoration: none;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
+    overflow: hidden;
+    z-index: 1;
+    align-items: center;
+    gap: 0.5rem;
 }
 
-.back-button:hover {
-    background-color: #6b0000;
-    transform: translateX(-5px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+.back-button::after {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        45deg, transparent, rgba(255,255,255,0.3), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.4s ease;
+    z-index: -1;
+
 }
 
 .back-button::before {
     content: "← ";
     font-size: 1.2rem;
     transition: transform 0.3s ease;
+    display: inline-block;
+}
+
+.back-button:hover {
+    background-color: #6b0000;
+    transform: translateX(-5px);
+    box-shadow: 0 5px 15px rgba(139, 0, 0, 0.2);
+    text-decoration: none;
+}
+
+.back-button:hover::after {
+    transform: translateX(100%);
 }
 
 .back-button:hover::before {
@@ -87,7 +119,7 @@
 /* ========================================================================= */
 .item-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(17.5rem, 1fr));
     margin-top: 2rem;
     gap: 1.5rem;
 }
@@ -97,11 +129,11 @@ hover animations */
 .category-card {
     position: relative;
     display: block;
+    margin: 0;
     padding: 1.5rem;
     border: 1px solid #e0e0e0;
-    border-radius: 10px;
+    border-radius: 0.625rem;
     background: #ffffea;
-    text-decoration: none;
     color: var(--text-dark);
     text-align: center;
     text-decoration: none;
@@ -112,14 +144,14 @@ hover animations */
 }
 
 .category-card::before {
-    content: "";
     position: absolute;
+    content: "";
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     border: 2px solid transparent;
-    border-radius: 10px;
+    border-radius: 0.625rem;
     box-shadow: 0 8px 25px rgba(139, 0, 0, 0.2);
     opacity: 0;
     pointer-events: none;
@@ -143,9 +175,9 @@ with rotation animation when hovering over a category card */
 .category-icon {
     position: relative;
     display: inline-block;
-    margin-bottom: 1rem;
-    font-size: 3.5rem;
+    margin: 0 0 1rem 0;
     color: var(--text-dark);
+    font-size: 3.5rem;
     transform-origin: center bottom;
     backface-visibility: hidden;
     transition: 
@@ -164,7 +196,7 @@ with rotation animation when hovering over a category card */
 text styles with color change animation */
 .category-card h2 {
     position: relative;
-    margin-bottom: 0.5rem;
+    margin: 0 0 0.5rem 0;
     transition: color 0.3s ease;
     z-index: 2;
 }
@@ -176,8 +208,8 @@ text styles with color change animation */
 .category-card p {
     position: relative;
     margin: 0;
-    font-size: 0.9rem;
     color: #666;
+    font-size: 0.9rem;
     transition: color 0.3s ease;
     z-index: 2;
 }
@@ -190,7 +222,7 @@ of food cards */
     display: flex;
     flex-direction: column;
     height: 100%;
-    border-radius: 12px;
+    border-radius: 0.75rem;
     background: #fffff0;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
@@ -230,16 +262,16 @@ of food cards */
 }
 
 .item-title {
-    margin-bottom: 0.5rem;
+    margin: 0 0 0.5rem 0;
     color: var(--text-dark);
     text-align: center;
 }
 
 .item-description {
     margin: 0.5rem 0;
+    color: var(--text-dark);
     font-size: 1rem;
     line-height: 1.4;
-    color: var(--text-dark);
     text-align: justify;
     hyphens: auto;
     overflow: hidden;
@@ -247,26 +279,58 @@ of food cards */
 
 .item-price {
     margin: 0.5rem 0;
+    color: var(--primary-color);
     font-size: 1.4rem;
     font-weight: bold;
-    color: var(--primary-color);
+}
+
+.item-card a {
+    text-decoration: none;
 }
 
 /* Кнопка "Подробнее" / "More details" button */
 .item-button {
+    position: relative;
     display: inline-block;
-    margin-top: auto;
+    margin: auto 0 0 0;
     padding: 0.5rem 1rem;
-    border-radius: 5px;
+    border: none;
+    border-radius: 0.5rem;
     background-color: var(--primary-color);
     color: var(--text-light);
+    font-size: 1rem;
+    font-weight: 600;
     text-align: center;
     text-decoration: none;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    z-index: 1;
+}
+
+.item-button::after {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        45deg, transparent, rgba(255,255,255,0.3), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.4s ease;
+    z-index: -1;
 }
 
 .item-button:hover {
     background-color: #6b0000;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(139, 0, 0, 0.2);
+    text-decoration: none;
+}
+
+.item-button:hover::after {
+    transform: translateX(100%);
 }
 
 /* Стили для сообщения при отсутсвии блюд / Styles for message when
@@ -284,42 +348,41 @@ dishes are missing */
 /* ========================================================================= */
 .item-detail {
     padding: 2rem;
-    border: 1px solid rgba(139, 0, 0, 0.1);
-    border-radius: 15px;
     background: #fffff0;
+    border: 1px solid rgba(139, 0, 0, 0.1);
+    border-radius: 1rem;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
 }
 
 /* Основная информация о блюде / Basic information about the dish */
 .item-header {
-    margin-bottom: 1.5rem;
+    margin: 0 0 1.5rem 0;
     text-align: center;
 }
 
 .item-header h1 {
-    margin-bottom: 0.5rem;
+    margin: 0 0 0.5rem 0;
     color: var(--primary-color);
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .item-price-detail {
+    color: var(--primary-color);
     font-size: 1.5rem;
     font-weight: bold;
-    color: var(--primary-color);
 }
 
 .item-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    margin-top: 2rem;
+    margin: 2rem 0 0 0;
     gap: 2rem;
 }
 
-/* Контейнер с изображением / Container with image */
 .item-image-container {
     position: relative;
-    padding-top: 100%;
-    border-radius: 10px;
+    padding: 100% 0 0 0;
+    border-radius: 0.625rem;
     overflow: hidden;
 }
 
@@ -330,7 +393,7 @@ dishes are missing */
     width: 100%;
     height: 100%;
     object-fit: contain;
-    border-radius: 10px;
+    border-radius: 0.625rem;
     transition: transform 0.3s ease;
 }
 
@@ -342,9 +405,9 @@ dishes are missing */
 
 .item-description {
     padding: 0.5rem 0;
+    color: var(--text-dark);
     font-size: 1rem;
     line-height: 1.6;
-    color: var(--text-dark);
     border-bottom: 1px dashed rgba(139, 0, 0, 0.2);
 }
 
@@ -352,15 +415,15 @@ dishes are missing */
 .nutrition-info {
     margin-top: 1.5rem;
     padding: 1.5rem;
-    border: 1px solid rgba(139, 0, 0, 0.1);
-    border-radius: 10px;
     background: rgba(245, 245, 220, 0.7);
+    border: 1px solid rgba(139, 0, 0, 0.1);
+    border-radius: 0.625rem;
 }
 
 .nutrition-info h3 {
-    margin-bottom: 1rem;
-    font-size: 1.3rem;
+    margin: 0 0 1rem 0;
     color: var(--primary-color);
+    font-size: 1.3rem;
     text-align: center;
 }
 
@@ -380,20 +443,20 @@ dishes are missing */
 
 /* Сетка топпингов / Toppings grid */
 .toppings-section {
-    margin-top: 2rem;
+    margin: 2rem 0 0 0;
 }
 
 .toppings-section h3 {
-    margin-bottom: 1.5rem;
-    font-size: 1.3rem;
+    margin: 0 0 1.5rem 0;
     color: var(--primary-color);
+    font-size: 1.3rem;
     text-align: center;
 }
 
 .toppings-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    margin-top: 1rem;
+    margin: 1rem 0 0 0;
     gap: 1.5rem;
 }
 
@@ -401,11 +464,11 @@ dishes are missing */
     display: flex;
     justify-content: space-between;
     align-items: center;
-    min-height: 60px;
+    min-height: 3.75rem;
     padding: 1rem;
-    border: 1px solid rgba(139, 0, 0, 0.2);
-    border-radius: 10px;
     background: white;
+    border: 1px solid rgba(139, 0, 0, 0.2);
+    border-radius: 0.625rem;
     transition: all 0.3s ease;
 }
 
@@ -418,16 +481,16 @@ dishes are missing */
 
 .topping-name {
     flex: 1;
-    padding-right: 1rem;
-    font-weight: 500;
+    padding: 0 1rem 0 0;
     color: var(--text-dark);
+    font-weight: 500;
     word-break: break-word;
     hyphens: auto;
 }
 
 .topping-price {
-    font-weight: bold;
     color: var(--primary-color);
+    font-weight: bold;
     white-space: nowrap;
 }
 
@@ -458,8 +521,8 @@ dishes are missing */
 
 @media(max-width: 992px) {
     .menu-container {
-        padding: 1.5rem;
         margin: 1.5rem auto;
+        padding: 1.5rem;
     }
 
     .menu-container h1 {
@@ -467,7 +530,7 @@ dishes are missing */
     }
 
     .item-grid {
-        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
         gap: 1.2rem;
     }
 
@@ -485,7 +548,7 @@ dishes are missing */
     }
 
     .item-image-container {
-        padding-top: 70%;
+        padding: 70% 0 0 0;
     }
 
     .nutrition-info ul {
@@ -506,7 +569,7 @@ dishes are missing */
 
     .menu-container h1 {
         font-size: 2rem;
-        margin-bottom: 1.2rem;
+        margin: 0 0 1.2rem 0;
     }
 
     .divider {
@@ -532,7 +595,7 @@ dishes are missing */
     }
 
     .item-card {
-        border-radius: 10px;
+        border-radius: 0.625rem;
     }
 
     .item-info {
@@ -590,7 +653,7 @@ dishes are missing */
 
     .category-icon {
         font-size: 2.2rem;
-        margin-bottom: 0.8rem;
+        margin: 0 0 0.8rem 0;
     }
 
     .category-card h2 {
@@ -645,7 +708,7 @@ dishes are missing */
 @media(max-width: 480px) {
     .menu-container {
         padding: 0.8rem;
-        border-radius: 8px;
+        border-radius: 0.5rem;
     }
 
     .menu-container h1 {
@@ -706,7 +769,7 @@ dishes are missing */
 
     .topping-card {
         padding: 0.8rem;
-        min-height: 50px;
+        min-height: 3.125rem;
     }
 
     .topping-name {

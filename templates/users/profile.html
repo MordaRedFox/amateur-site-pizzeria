@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block title %}Кабинет охраны{% endblock %}
+
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/profile.css' %}">
 {% endblock %}
@@ -10,40 +12,57 @@
     <div class="profile-info">
         {% if not edit_mode %}
         <h1>Кабинет охраны</h1>
+
         <div class="profile-divider"></div>
 
         <div class="profile-view">
             <div class="profile-field">
-                <p><strong>Никнейм:</strong> {{ user.username }}</p>
+                <p>
+                    <strong>Никнейм:</strong>
+                    {{ user.username }}
+                </p>
             </div>
             <div class="profile-field">
-                <p><strong>Имя:</strong> 
-                {{ user.first_name|default:"Не указано" }}</p>
+                <p>
+                    <strong>Имя:</strong>
+                    {{ user.first_name|default:"Не указано" }}
+                </p>
             </div>
             <div class="profile-field">
-                <p><strong>Фамилия:</strong> 
-                {{ user.last_name|default:"Не указано" }}</p>
+                <p>
+                    <strong>Фамилия:</strong>
+                    {{ user.last_name|default:"Не указано" }}
+                </p>
             </div>
             <div class="profile-field">
-                <p><strong>Email:</strong> {{ user.email }}</p>
+                <p>
+                    <strong>Email:</strong>
+                    {{ user.email }}
+                </p>
             </div>
             <div class="profile-field">
-                <p><strong>Дата регистрации:</strong> 
-                {{ user.date_joined|date:"d.m.Y H:i" }}</p>
+                <p>
+                    <strong>Дата регистрации:</strong>
+                    {{ user.date_joined|date:"d.m.Y H:i" }}
+                </p>
             </div>
             <div class="profile-field">
-                <p><strong>Последний вход:</strong> 
-                {{ user.last_login|date:"d.m.Y H:i"|default:"Ещё не входил" }}
+                <p>
+                    <strong>Последний вход:</strong>
+                    {{ user.last_login|date:"d.m.Y H:i"|default:"Ещё не входил" }}
                 </p>
             </div>
 
             <div class="profile-actions">
-                <a href="?edit=true" class="btn btn-edit">Редактировать</a>
+                <a href="?edit=true" class="btn btn-edit">
+                    Редактировать данные
+                </a>
                 <form action="{% url 'logout' %}" method="post"
                       class="logout-form">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-logout">
-                        Выйти из аккаунта</button>
+                        Выйти из аккаунта
+                    </button>
                 </form>
             </div>
         </div>
@@ -52,6 +71,7 @@
 
         {% else %}
         <h1>Редактирование данных</h1>
+
         <div class="profile-divider"></div>
 
         <form method="post" class="profile-edit-form">
@@ -80,8 +100,9 @@
 
             <div class="form-actions">
                 <button type="submit" class="btn btn-save">
-                    Сохранить изменения</button>
-                <a href="." class="btn btn-cancel">Отменить</a>
+                    Сохранить изменения
+                </button>
+                <a href="." class="btn btn-cancel">Отменить изменения</a>
             </div>
         </form>
         {% endif %}

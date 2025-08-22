@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block title %}Блокировка{% endblock %}
+
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/locked.css' %}">
 {% endblock %}
@@ -10,13 +12,15 @@
     <div class="lockout-box" data-unlock-time="{{ unlock_timestamp }}">
         <div class="lockout-icon">🍕</div>
         <h1>Доступ временно ограничен</h1>
-
         <div class="lockout-message">
-            <p>Вы превысили количество попыток входа.</p>
-            <p>Попробуйте снова через 
+            <p>
+                Вы превысили количество попыток входа.
+            </p>
+            <p>
+                Попробуйте снова через
                 <span class="countdown">
-                    <span id="countdown-hours">00</span> ч 
-                    <span id="countdown-minutes">00</span> мин 
+                    <span id="countdown-hours">00</span> ч.
+                    <span id="countdown-minutes">00</span> мин.
                     <span id="countdown-seconds">00</span> сек.
                 </span>
             </p>

@@ -11,6 +11,18 @@
     --shadow: 0 0 20px rgba(139, 0, 0, 0.2);
 }
 
+/* Анимации / Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.8; }
+}
+
 /* ========================================================================= */
 /* Стили страницы блокировки / Lockout page styles */
 /* ========================================================================= */
@@ -22,20 +34,21 @@
     min-height: 80vh;
     padding: 2rem;
     background-color: var(--secondary-color);
+    animation: fadeIn 0.5s ease-out;
 }
 
 .lockout-box {
+    position: relative;
     width: 100%;
     max-width: 36rem;
     margin: 0 auto;
     padding: 2.5rem;
+    overflow: hidden;
     background-color: #ffffea;
+    border: 1px solid rgba(139, 0, 0, 0.15);
     border-radius: 0.625rem;
     box-shadow: var(--shadow);
-    border: 1px solid rgba(139, 0, 0, 0.15);
     text-align: center;
-    position: relative;
-    overflow: hidden;
 }
 
 .lockout-box h1 {
@@ -46,23 +59,17 @@
 }
 
 .lockout-icon {
-    font-size: 4rem;
     margin-bottom: 1.5rem;
     color: var(--primary-color);
+    font-size: 4rem;
     animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-    0% { transform: scale(1); opacity: 0.8; }
-    50% { transform: scale(1.1); opacity: 1; }
-    100% { transform: scale(1); opacity: 0.8; }
 }
 
 .lockout-message {
     margin-bottom: 1.5rem;
+    color: var(--text-dark);
     font-size: 1.1rem;
     line-height: 1.6;
-    color: var(--text-dark);
 }
 
 .lockout-message p {
@@ -70,15 +77,15 @@
 }
 
 .countdown {
-    font-weight: bold;
     color: var(--primary-color);
+    font-weight: bold;
 }
 
 .hint {
-    font-size: 0.9rem;
-    color: #666;
-    font-style: italic;
     margin-bottom: 1rem;
+    color: #666;
+    font-size: 0.9rem;
+    font-style: italic;
 }
 
 /* ========================================================================= */
@@ -100,8 +107,8 @@
 
 @media(max-width: 992px) {
     .lockout-box {
-        padding: 2rem;
         max-width: 32rem;
+        padding: 2rem;
     }
 
     .lockout-icon {
@@ -119,126 +126,123 @@
 
 @media(max-width: 768px) {
     .lockout-container {
-        padding: 1.5rem;
+        min-height: 85vh;
+        padding: 2rem;
     }
 
     .lockout-box {
-        padding: 1.8rem;
-        max-width: 28rem;
+        max-width: 32rem;
+        padding: 2.2rem;
     }
 
     .lockout-box h1 {
-        margin-bottom: 1.2rem;
-        font-size: clamp(1.6rem, 5vw, 2rem);
+        margin-bottom: 1.5rem;
+        font-size: 2rem;
     }
 
     .lockout-icon {
-        font-size: 3rem;
-        margin-bottom: 1.2rem;
+        margin-bottom: 1.5rem;
+        font-size: 3.5rem;
     }
 
     .lockout-message {
-        font-size: 0.95rem;
-        margin-bottom: 1.2rem;
+        margin-bottom: 1.5rem;
+        font-size: 1.1rem;
+        line-height: 1.6;
     }
 
     .countdown {
-        font-size: 0.95rem;
+        font-size: 1.1rem;
     }
 
     .hint {
-        font-size: 0.8rem;
-        margin-bottom: 0.8rem;
+        margin-bottom: 1rem;
+        font-size: 0.95rem;
     }
 }
 
 @media(max-width: 576px) {
     .lockout-container {
-        padding: 1.2rem;
-        min-height: 85vh;
+        min-height: 90vh;
+        padding: 1.8rem;
     }
 
     .lockout-box {
-        padding: 1.5rem;
-        max-width: 24rem;
+        max-width: 28rem;
+        padding: 2rem;
     }
 
     .lockout-box h1 {
-        margin-bottom: 1rem;
-        font-size: clamp(1.4rem, 5vw, 1.8rem);
+        margin-bottom: 1.4rem;
+        font-size: 1.8rem;
     }
 
     .lockout-icon {
-        font-size: 2.5rem;
-        margin-bottom: 1rem;
+        margin-bottom: 1.4rem;
+        font-size: 3.2rem;
     }
 
     .lockout-message {
-        font-size: 0.9rem;
-        margin-bottom: 1rem;
-    }
-
-    .countdown {
-        font-size: 0.9rem;
+        margin-bottom: 1.4rem;
+        font-size: 1rem;
     }
 
     .hint {
-        font-size: 0.75rem;
+        font-size: 0.9rem;
     }
 }
 
 @media(max-width: 480px) {
     .lockout-container {
-        padding: 1rem;
+        padding: 1.5rem;
     }
 
     .lockout-box {
-        padding: 1.2rem;
-        max-width: 20rem;
-        border-radius: 0.5rem;
+        max-width: 26rem;
+        padding: 1.8rem;
+        border-radius: 0.75rem;
     }
 
     .lockout-box h1 {
-        font-size: clamp(1.3rem, 5vw, 1.6rem);
+        font-size: 1.7rem;
     }
 
     .lockout-icon {
-        font-size: 2.2rem;
+        font-size: 3rem;
     }
 
     .lockout-message {
-        font-size: 0.85rem;
-        line-height: 1.5;
+        font-size: 0.98rem;
     }
 
     .hint {
-        font-size: 0.7rem;
+        font-size: 0.85rem;
     }
 }
 
 @media(max-width: 360px) {
     .lockout-box {
-        padding: 1rem;
-        max-width: 18rem;
+        max-width: 24rem;
+        padding: 1.6rem;
     }
 
     .lockout-box h1 {
-        font-size: clamp(1.2rem, 5vw, 1.4rem);
+        font-size: 1.6rem;
     }
 
     .lockout-icon {
-        font-size: 2rem;
+        font-size: 2.8rem;
     }
 
     .lockout-message {
-        font-size: 0.8rem;
+        font-size: 0.95rem;
     }
 
     .countdown {
-        font-size: 0.8rem;
+        font-size: 0.95rem;
     }
 
     .hint {
-        font-size: 0.65rem;
+        font-size: 0.8rem;
     }
 }

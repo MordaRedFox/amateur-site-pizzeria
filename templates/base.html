@@ -12,22 +12,25 @@
     <link rel='stylesheet' href='{% static "css/base.css" %}'>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" 
-          href="{% static 'media/favicon/favicon.ico' %}">
-    <link rel="apple-touch-icon" sizes="180x180" 
-          href="{% static 'media/favicon/apple-touch-icon.png' %}">
-    <link rel="icon" type="image/png" sizes="32x32" 
-          href="{% static 'media/favicon/favicon-32x32.png' %}">
-    <link rel="icon" type="image/png" sizes="16x16" 
-          href="{% static 'media/favicon/favicon-16x16.png' %}">
-    <link rel="manifest" 
-          href="{% static 'media/favicon/site.webmanifest' %}">
+    <link rel="icon" type="image/x-icon"
+        href="{% static 'media/favicon/favicon.ico' %}">
+    <link rel="apple-touch-icon" sizes="180x180"
+        href="{% static 'media/favicon/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32"
+        href="{% static 'media/favicon/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16"
+        href="{% static 'media/favicon/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'media/favicon/site.webmanifest' %}">
 
     {% block extra_css %}{% endblock %}
 </head>
 
 <body>
+    <input type="checkbox" id="burger-toggle" style="display: none;">
     <nav>
+        <label for="burger-toggle" class="burger-menu" aria-label="Открыть меню">
+            <span></span>
+        </label>
         <ul>
             <li><a href="{% url 'home' %}">Главная</a></li>
             <li><a href="{% url 'menu:categories' %}">Меню</a></li>
@@ -55,8 +58,8 @@
 
     <footer>
         <p>
-            <a href="https://github.com/MordaRedFox" target="_blank" 
-                rel="noopener noreferrer">Animatronic Pizzeria</a>
+            <a href="https://github.com/MordaRedFox" target="_blank"
+               rel="noopener noreferrer">Animatronic Pizzeria</a>
             © {% now "Y" %}
         </p>
     </footer>
