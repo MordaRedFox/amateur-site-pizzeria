@@ -4,22 +4,19 @@ from .models import (Pizza, Burger, Snack, Salad, Dessert, Drink,
                      DessertTopping, DrinkTopping)
 
 
-MODEL_MAP = {
-    'pizza': Pizza,
-    'burger': Burger,
-    'snack': Snack,
-    'salad': Salad,
-    'dessert': Dessert,
-    'drink': Drink,
-}
-
-TOPPING_MAP = {
-    Pizza: PizzaTopping,
-    Burger: BurgerTopping,
-    Snack: SnackTopping,
-    Salad: SaladTopping,
-    Dessert: DessertTopping,
-    Drink: DrinkTopping,
+CATEGORY_CONFIG = {
+    'pizza': {'model': Pizza, 'name': 'Пицца', 'icon': '🍕',
+                'topping_model': PizzaTopping},
+    'burger': {'model': Burger, 'name': 'Бургеры', 'icon': '🍔',
+                'topping_model': BurgerTopping},
+    'snack': {'model': Snack, 'name': 'Снэки', 'icon': '🍟',
+                'topping_model': SnackTopping},
+    'salad': {'model': Salad, 'name': 'Салаты', 'icon': '🥗',
+                'topping_model': SaladTopping},
+    'dessert': {'model': Dessert, 'name': 'Десерты', 'icon': '🍰',
+                'topping_model': DessertTopping},
+    'drink': {'model': Drink, 'name': 'Напитки', 'icon': '🥤',
+                'topping_model': DrinkTopping},
 }
 
 
@@ -28,20 +25,14 @@ def menu_categories(request):
     Представление страницы категорий меню
     View of the menu categories page
     """
-    categories = [
-        {'name': 'Пицца', 'url': 'pizza', 'count': Pizza.objects.count(),
-         'icon': '🍕'},
-        {'name': 'Бургеры', 'url': 'burger', 'count': Burger.objects.count(),
-         'icon': '🍔'},
-        {'name': 'Снэки', 'url': 'snack', 'count': Snack.objects.count(),
-         'icon': '🍟'},
-        {'name': 'Салаты', 'url': 'salad', 'count': Salad.objects.count(),
-         'icon': '🥗'},
-        {'name': 'Десерты', 'url': 'dessert', 'count': Dessert.objects.count(),
-         'icon': '🍰'},
-        {'name': 'Напитки', 'url': 'drink', 'count': Drink.objects.count(),
-         'icon': '🥤'},
-    ]
+    categories = []
+    for url, config in CATEGORY_CONFIG.items():
+        categories.append({
+            'name': config['name'],
+            'url': url,
+            'count': config['model'].objects.count(),
+            'icon': config['icon']
+        })
 
     context = {
         'categories': categories,
@@ -55,12 +46,12 @@ def menu_items(request, category):
     Представление страницы списка блюд в категории
     View of the list page of dishes in a category
     """
-    model = MODEL_MAP.get(category)
-    if not model:
+    config = CATEGORY_CONFIG.get(category)
+    if not config:
         return render(request, '404.html', status=404)
 
-    items = model.objects.all()
-    category_name = model._meta.verbose_name_plural.capitalize()
+    items = config['model'].objects.all()
+    category_name = config['name']
 
     context = {
         'items': items,
@@ -76,14 +67,17 @@ def menu_item_detail(request, category, pk):
     Представление страницы со всей информацией о блюде
     View of a page with all the information about the dish
     """
-    model = MODEL_MAP.get(category)
-    if not model:
+    config = CATEGORY_CONFIG.get(category)
+    if not config:
         return render(request, '404.html', status=404)
 
-    item = get_object_or_404(model, pk=pk)
-    topping_model = TOPPING_MAP.get(model)
-    toppings = topping_model.objects.filter(item=item).select_related(
-        'topping')
+    item = get_object_or_404(config['model'], pk=pk)
+    if config['topping_model']:
+        topping_model = config['topping_model']
+        toppings = topping_model.objects.filter(item=item).select_related(
+            'topping')
+    else:
+        toppings = []
 
     context = {
         'item': item,
