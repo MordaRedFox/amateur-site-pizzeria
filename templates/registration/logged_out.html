@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Выход{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/registration.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="logout-container">
+    <div class="logout-box">
+        <h1>До скорой встречи!</h1>
+        <div class="logout-message">
+            <p>
+                Вы успешно вышли из системы.
+            </p>
+            <p>
+                Аниматроники будут по вам скучать...
+            </p>
+            <div class="animatronic-icon">♪</div>
+        </div>
+        <div class="logout-links">
+            <a href="{% url 'home' %}" class="btn-primary">
+                Вернуться в пиццерию
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
